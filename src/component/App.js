@@ -11,6 +11,7 @@ class App extends  React.Component {
 
     super(props);
 
+    this.allCountries = [];
     this.state = {
       countries : []
     }
@@ -19,7 +20,15 @@ class App extends  React.Component {
   componentDidMount = async () => {
 
     const getAll = await restCountryApi.get('./all');
+    this.allCountries = getAll.data;
     this.setState({ countries : getAll.data});
+  }
+
+  doSearch = term => {
+    const filtererCountries = this.allCountries.filter(country => country.name.includes(term));
+    this.setState({
+      countries: filtererCountries
+    });
   }
 
   render(){
@@ -28,14 +37,14 @@ class App extends  React.Component {
           <div>
             < Header/>
           </div>
-          <div class="country-info">
-            <Search/>
+          <div className="country-info">
+            <Search onChangeHandle={this.doSearch} />
           </div>
           <div className="row">
               < All countries={this.state.countries} />
           </div>
       </div>
-    
+
     );
   }
 

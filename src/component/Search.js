@@ -1,7 +1,7 @@
 import React from 'react';
 
 class Search extends React.Component{
-     
+
     constructor() {
         super();
         this.state = {
@@ -9,36 +9,27 @@ class Search extends React.Component{
             countries: []
         };
     }
+
     onChangeHandle(event) {
-        this.setState({ searchText: event.target.value });
+      this.props.onChangeHandle(event.target.value);
     }
 
+    render() {
+      return (
+          <main>
+              <section class="search">
+                  <form>
+                      <input
+                          id="country-name"
+                          placeholder="Enter your Country"
+                          type="text"
+                          onChange={event => this.onChangeHandle(event)}
+                      />
+                  </form>
+              </section>
 
-
-
-
-render() {
-     this.props.countries.filter(
-         (country) => {
-             return country.name.indexOf(this.state.searchText) !== -1;
-         }
-     );
-    return (
-        <main>
-            <section class="search">
-                <form>
-                    <input 
-                        id="country-name" 
-                        placeholder="Enter your Country" 
-                        type="text" 
-                        onChange={event => this.onChangeHandle(event)}
-                        value={this.state.searchText}
-                    />
-                </form>
-            </section>
-    
-        </main>
-    );
-}
+          </main>
+      );
+    }
 }
 export default Search;
