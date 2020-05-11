@@ -12,7 +12,9 @@
     border: none;
 }
 
-::placeholder{
+.search > form > input[type=text]{
   padding-left: 15px;
 }
+
+
 

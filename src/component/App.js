@@ -22,12 +22,13 @@ class App extends  React.Component {
     const getAll = await restCountryApi.get('./all');
     this.allCountries = getAll.data;
     this.setState({ countries : getAll.data});
+    console.log(this.state.countries)
   }
 
   doSearch = term => {
-    const filtererCountries = this.allCountries.filter(country => country.name.includes(term));
+    const filtererCountries = this.allCountries.filter(country => country.name.toLowerCase().indexOf(term.toLowerCase()) !== -1);
     this.setState({
-      countries: filtererCountries
+      countries: filtererCountries 
     });
   }
 
